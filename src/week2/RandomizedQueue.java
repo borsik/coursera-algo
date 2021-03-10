@@ -4,6 +4,7 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private int n;
@@ -28,6 +29,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // add the item
     public void enqueue(Item item) {
+        if (item == null) throw new IllegalArgumentException("null");
         if (n == queue.length) {
             resize(queue.length * 2);
         }
@@ -46,6 +48,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // remove and return a random item
     public Item dequeue() {
+        if (isEmpty()) throw new NoSuchElementException("empty");
         if (n > 0 && n == queue.length / 4) {
             resize(n / 2);
         }
@@ -60,6 +63,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return a random item (but do not remove it)
     public Item sample() {
+        if (isEmpty()) throw new NoSuchElementException("empty");
         return queue[StdRandom.uniform(n)];
     }
 
@@ -82,9 +86,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
 
         public Item next() {
+            if (!hasNext()) throw new NoSuchElementException("empty");
             Item el = copy[current];
             current++;
             return el;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
     }
 
