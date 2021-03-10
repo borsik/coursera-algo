@@ -1,3 +1,5 @@
+package week1;
+
 public class QueueArray {
     private String[] q;
     private int head;
