@@ -1,7 +1,3 @@
-package week2;
-
-import edu.princeton.cs.algs4.StdOut;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -68,7 +64,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) throw new NoSuchElementException();
         Node oldFirst = first;
         first = first.next;
-        first.prev = null;
+        if (first != null) first.prev = null;
         n--;
         return oldFirst.item;
     }
@@ -78,7 +74,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) throw new NoSuchElementException();
         Node oldLast = last;
         last = last.prev;
-        last.next = null;
+        if (last != null) last.next = null;
         n--;
         return oldLast.item;
     }
@@ -109,23 +105,27 @@ public class Deque<Item> implements Iterable<Item> {
 
     // unit testing (required)
     public static void main(String[] args) {
+//        Deque<Integer> deque = new Deque<>();
+//        deque.addFirst(1);
+//        deque.addLast(2);
+//        deque.addLast(3);
+//        deque.addFirst(0);
+//        for (Integer d : deque) {
+//            StdOut.println(d);
+//        }
+//        StdOut.println(deque.size());
+//        StdOut.println("===============");
+//        deque.removeFirst();
+//        deque.removeLast();
+//        for (Integer d : deque) {
+//            StdOut.println(d);
+//        }
+//        StdOut.println(deque.size());
+//        deque.addFirst(null);
+
         Deque<Integer> deque = new Deque<>();
         deque.addFirst(1);
-        deque.addLast(2);
-        deque.addLast(3);
-        deque.addFirst(0);
-        for (Integer d : deque) {
-            StdOut.println(d);
-        }
-        StdOut.println(deque.size());
-        StdOut.println("===============");
         deque.removeFirst();
-        deque.removeLast();
-        for (Integer d : deque) {
-            StdOut.println(d);
-        }
-        StdOut.println(deque.size());
-        deque.addFirst(null);
     }
 
 }

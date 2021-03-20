@@ -1,5 +1,3 @@
-package week2;
-
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
@@ -11,7 +9,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] queue;
 
     // construct an empty randomized queue
-    @SuppressWarnings("unchecked")
     public RandomizedQueue() {
         n = 0;
         queue = (Item[]) new Object[1];
@@ -37,7 +34,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         n++;
     }
 
-    @SuppressWarnings("unchecked")
     private void resize(int capacity) {
         Item[] copy = (Item[]) new Object[capacity];
         for (int i = 0; i < n; i++) {
@@ -69,16 +65,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private class RandomIterator implements Iterator<Item> {
         private int current = 0;
-        private Item[] copy = init();
+        private final Item[] copy = init();
 
-        @SuppressWarnings("unchecked")
         private Item[] init() {
-            Item[] copy = (Item[]) new Object[n];
+            Item[] randomCopy = (Item[]) new Object[n];
             for (int i = 0; i < n; i++) {
-                copy[i] = queue[i];
+                randomCopy[i] = queue[i];
             }
-            StdRandom.shuffle(copy);
-            return copy;
+            StdRandom.shuffle(randomCopy);
+            return randomCopy;
         }
 
         public boolean hasNext() {
